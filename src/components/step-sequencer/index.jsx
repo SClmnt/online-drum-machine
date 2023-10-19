@@ -45,6 +45,12 @@ class StepSequencer extends Component {
         this.setState({ sequences: newSequences });
     }
 
+    clearAllSteps = () =>{
+        this.state.sequences.forEach((sequence)=>{
+            sequence.steps = new Array(this.state.numSteps).fill(false);
+        });
+    }
+
     playStep = () => {
         const {currentStep, sequences, numSteps} = this.state;
         sequences.forEach((sequence, lineIndex) => {
@@ -156,11 +162,11 @@ class StepSequencer extends Component {
                         value={this.state.globalVolume}
                         onChange={(e) => this.changeGlobalVolume(parseInt(e.target.value))}
                     />                     
-                </div>
-               
+                </div>               
                 <button onClick={this.state.playing ? this.stopSequencer : this.startSequencer}>
                     {this.state.playing? 'Stop' : 'Play'}
                 </button>
+                <button onClick={this.clearAllSteps}>Clear</button>
             </main>
         );
     }
