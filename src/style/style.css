@@ -1,3 +1,89 @@
-.active{
-    background-color: blue;
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;700&display=swap");
+* {
+  font-family: "Kanit", sans-serif;
 }
+
+#root {
+  width: 100%;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f6fff8;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  max-width: 768px;
+  width: 648px;
+}
+
+.sequence__line {
+  display: flex;
+  flex-direction: column;
+  padding: 1% 0%;
+}
+.sequence__grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.sequence__grid--steps {
+  display: flex;
+  flex-direction: row;
+}
+.sequence__grid--steps > button {
+  aspect-ratio: 1/1;
+  width: 30px;
+}
+.sequence__grid--steps > button:hover {
+  background-color: #6096ba;
+}
+.sequence__grid--name {
+  padding: 0% 3px;
+}
+.sequence__volume {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.parameter__lecture {
+  width: 25%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.parameter__lecture > button {
+  font-size: medium;
+  padding: 5% 10%;
+}
+.parameter__lecture > button:hover {
+  background-color: #6096ba;
+}
+
+input[type=range] {
+  background-color: #6096ba;
+}
+
+.playing {
+  border: 1px solid #6096ba;
+}
+
+button {
+  border: none;
+}
+
+.active {
+  background-color: #6096ba;
+}/*# sourceMappingURL=style.css.map */
