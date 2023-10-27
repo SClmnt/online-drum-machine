@@ -45,9 +45,15 @@ class StepSequencer extends Component {
         this.setState({ sequences: newSequences });
     }
 
+    clearAllSteps = () =>{
+        this.state.sequences.forEach((sequence)=>{
+            sequence.steps = new Array(this.state.numSteps).fill(false);
+        });
+    }
+
     playStep = () => {
         const {currentStep, sequences, numSteps} = this.state;
-        sequences.forEach((sequence, lineIndex) => {
+        sequences.forEach((sequence) => {
             if (sequence.steps[currentStep]){
             sequence.sound.play();
             }
@@ -69,7 +75,6 @@ class StepSequencer extends Component {
         sequences[sequenceIndex].volume = newVolume;
         sequences[sequenceIndex].sound.volume(newVolume/100);
         this.setState({ sequences });
-        console.log(newVolume);
     }
 
     changeGlobalVolume = (volume) => {
@@ -82,11 +87,10 @@ class StepSequencer extends Component {
         const stepDuration = 60000 / this.state.bpm;
         this.setState({ playing: true});
         this.sequencerInterval = setInterval(this.playStep, stepDuration / 4);
-        console.log(stepDuration)
     };
 
     stopSequencer = () => {
-        this.setState({ playing: false});
+        this.setState({ playing: false, currentStep: 0});
         clearInterval(this.sequencerInterval);
     };
 
@@ -100,17 +104,20 @@ class StepSequencer extends Component {
         return (
             <main>
                 {this.state.sequences.map((sequence, lineIndex)=>(
-                    <div key={lineIndex}>
-                        <div className='step-grid'>{sequence.name}
-                            {sequence.steps.map((step, stepIndex)=>(
-                                <button
-                                    key={stepIndex}
-                                    className={step ? 'active' : ''}
-                                    onClick={()=> this.toggleStep(lineIndex, stepIndex)}>{stepIndex+1}
-                                </button>
-                            ))}
+                    <div className="sequence__line" key={lineIndex}>
+                        <div className='sequence__grid'>
+                            <span className="sequence__grid--name">{sequence.name}</span>
+                            <div className="sequence__grid--steps">
+                                {sequence.steps.map((step, stepIndex)=>(
+                                    <button
+                                        key={stepIndex}
+                                        className={`${step ? 'active' : 'inactive'} ${stepIndex === this.state.currentStep ? 'playing' : ''}`}
+                                        onClick={()=> this.toggleStep(lineIndex, stepIndex)}>{stepIndex+1}
+                                    </button>                                    
+                                ))}                                
+                            </div>
                         </div>
-                        <div>
+                        <div className="sequence__volume">
                             <label htmlFor="volumeRange">Volume: {this.state.sequences[lineIndex].volume}</label>
                             <input
                                 type="range"
@@ -124,7 +131,7 @@ class StepSequencer extends Component {
                         </div>
                     </div>
                 ))}
-                <div>
+                <div className="parameter__tempo">
                     <label htmlFor="bpmRange">Tempo (BPM): {this.state.bpm}</label>
                     <input
                         type="range"
@@ -135,17 +142,17 @@ class StepSequencer extends Component {
                         onChange={this.handleBpmChange}
                     />                    
                 </div>
-                <div>
+                <div className="parameter__steps">
                     <label htmlFor="stepsRange">Nombre de pas: {this.state.numSteps}</label>
                     <input
                         type="range"
                         min="1"
-                        max="32"
+                        max="16"
                         value={this.state.numSteps}
                         onChange={this.handleNumStepsChange}
                     />
                 </div>
-                <div>
+                <div className="parameter__volume">
                     <label htmlFor="globalVolumeRange">Volume: {this.state.globalVolume}</label>
                     <input
                         type="range"
@@ -157,10 +164,13 @@ class StepSequencer extends Component {
                         onChange={(e) => this.changeGlobalVolume(parseInt(e.target.value))}
                     />                     
                 </div>
-               
-                <button onClick={this.state.playing ? this.stopSequencer : this.startSequencer}>
-                    {this.state.playing? 'Stop' : 'Play'}
-                </button>
+                <div className="parameter__lecture">
+                    <button className="parameter__lecture--play" onClick={this.state.playing ? this.stopSequencer : this.startSequencer}>
+                        {this.state.playing? 'Stop' : 'Play'}
+                    </button>
+                    <button className="parameter__lecture--clear" onClick={this.clearAllSteps}>Clear</button>                    
+                </div>               
+
             </main>
         );
     }
