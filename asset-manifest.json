@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/online-drum-machine/static/css/main.a72eeb1f.css",
+    "main.js": "/online-drum-machine/static/js/main.54e47452.js",
+    "static/media/kick.wav": "/online-drum-machine/static/media/kick.099ccabad521a17e132b.wav",
+    "static/media/clap.wav": "/online-drum-machine/static/media/clap.a390fb4f5607db9f80f9.wav",
+    "static/media/hihat_open.wav": "/online-drum-machine/static/media/hihat_open.01dcf5b0515308f1e4e0.wav",
+    "static/media/snare.wav": "/online-drum-machine/static/media/snare.3554d4603901ef2de66f.wav",
+    "static/media/bass.wav": "/online-drum-machine/static/media/bass.8d8e396cfd75c44b1b19.wav",
+    "static/media/hihat_closed.wav": "/online-drum-machine/static/media/hihat_closed.09399b68fe1712e8f9a1.wav",
+    "index.html": "/online-drum-machine/index.html",
+    "main.a72eeb1f.css.map": "/online-drum-machine/static/css/main.a72eeb1f.css.map",
+    "main.54e47452.js.map": "/online-drum-machine/static/js/main.54e47452.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a72eeb1f.css",
+    "static/js/main.54e47452.js"
+  ]
+}
