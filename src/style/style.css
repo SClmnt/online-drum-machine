@@ -33,6 +33,11 @@ main {
   flex-direction: column;
   padding: 1% 0%;
 }
+.sequence__underline {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .sequence__grid {
   display: flex;
   flex-direction: row;
@@ -52,23 +57,24 @@ main {
 .sequence__grid--name {
   padding: 0% 3px;
 }
-.sequence__volume {
+.sequence__parameter {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  width: 50%;
 }
 
-.parameter__lecture {
+.globalParameter__lecture {
   width: 25%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.parameter__lecture > button {
+.globalParameter__lecture > button {
   font-size: medium;
   padding: 5% 10%;
 }
-.parameter__lecture > button:hover {
+.globalParameter__lecture > button:hover {
   background-color: #6096ba;
 }
 

@@ -35,6 +35,11 @@ main{
         flex-direction: column;
         padding: 1% 0%;
     }
+    &__underline{
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between; 
+    }
     &__grid{
         display:flex;
         flex-direction: row;
@@ -54,14 +59,15 @@ main{
             padding: 0% 3px;
         }
     }
-    &__volume{
+    &__parameter{
         display:flex;
         flex-direction: row;
         justify-content: flex-start;
+        width: 50%;
     }
 }
 
-.parameter{
+.globalParameter{
     &__lecture{
         width: 25%;
         display: flex;

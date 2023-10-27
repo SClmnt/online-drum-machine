@@ -1,6 +1,7 @@
 import { Component } from "react";
 import kick from "../../assets/samples/kick.wav";
 import snare from "../../assets/samples/snare.wav";
+import clap from "../../assets/samples/clap.wav";
 import openHat from "../../assets/samples/hihat_open.wav";
 import closedHat from "../../assets/samples/hihat_closed.wav";
 import bass from "../../assets/samples/bass.wav";
@@ -13,11 +14,12 @@ class StepSequencer extends Component {
             playing: false,
             currentStep: 0,
             sequences: [
-                {sound : new Howl({ src: [kick], volume: 1}), steps: [], name: 'Kick', volume: 100},
-                {sound : new Howl({ src: [snare], volume: 1}), steps: [], name: 'Snare', volume: 100},
-                {sound : new Howl({ src: [openHat], volume: 1}), steps: [], name: 'Open Hat', volume: 100},
-                {sound : new Howl({ src: [closedHat], volume: 1}), steps: [], name: 'Closed Hat', volume: 100},
-                {sound : new Howl({ src: [bass], volume: 1}), steps: [], name: 'Bass', volume: 100}
+                {sound : new Howl({ src: [kick], volume: 1}), steps: [], name: 'Kick',id: '1', volume: 100, decay: 300},
+                {sound : new Howl({ src: [snare], volume: 1}), steps: [], name: 'Snare',id: '2', volume: 100, decay: 300},
+                {sound : new Howl({ src: [clap], volume: 1}), steps: [], name: 'Clap',id: '3', volume: 100, decay: 300},
+                {sound : new Howl({ src: [openHat], volume: 1}), steps: [], name: 'Open Hat',id: '4', volume: 100, decay: 300},
+                {sound : new Howl({ src: [closedHat], volume: 1}), steps: [], name: 'Closed Hat',id: '5', volume: 100, decay: 300},
+                {sound : new Howl({ src: [bass], volume: 1}), steps: [], name: 'Bass',id: '6', volume: 100, decay: 300}
             ],
             numSteps: 16,
             bpm: 120,
@@ -54,8 +56,10 @@ class StepSequencer extends Component {
     playStep = () => {
         const {currentStep, sequences, numSteps} = this.state;
         sequences.forEach((sequence) => {
+            const decay = sequence.decay
             if (sequence.steps[currentStep]){
-            sequence.sound.play();
+                sequence.sound.play();
+                sequence.sound.fade(1.0, 0.0, decay);
             }
         });
         this.setState({ currentStep: (currentStep + 1) % numSteps });
@@ -75,6 +79,13 @@ class StepSequencer extends Component {
         sequences[sequenceIndex].volume = newVolume;
         sequences[sequenceIndex].sound.volume(newVolume/100);
         this.setState({ sequences });
+    }
+
+    setDecay = (sequenceIndex, newDecay) => {
+        const sequences = [...this.state.sequences];
+        sequences[sequenceIndex].decay = newDecay;
+        this.setState({ sequences });
+
     }
 
     changeGlobalVolume = (volume) => {
@@ -117,21 +128,36 @@ class StepSequencer extends Component {
                                 ))}                                
                             </div>
                         </div>
-                        <div className="sequence__volume">
-                            <label htmlFor="volumeRange">Volume: {this.state.sequences[lineIndex].volume}</label>
-                            <input
-                                type="range"
-                                id="volumeRange"
-                                min="0"
-                                max="100"
-                                step="1"
-                                value={this.state.sequences[lineIndex].volume}
-                                onChange={(e) => this.setVolume(lineIndex, parseInt(e.target.value))}
-                            />                              
+                        <div className="sequence__underline">
+                            <div className="sequence__parameter sequence__parameter--volume">
+                                <label htmlFor={"volumeRange--"+(lineIndex+1)}>Volume: {this.state.sequences[lineIndex].volume}</label>
+                                <input
+                                    type="range"
+                                    id={"volumeRange--"+(lineIndex+1)}
+                                    min="0"
+                                    max="100"
+                                    step="1"
+                                    value={this.state.sequences[lineIndex].volume}
+                                    onChange={(e) => this.setVolume(lineIndex, parseInt(e.target.value))}
+                                />                              
+                            </div>
+                            <div className="sequence__parameter sequence__parameter--fade">
+                                <label htmlFor={"decayRange--"+(lineIndex+1)}>Decay: {this.state.sequences[lineIndex].decay} Ms</label>
+                                <input
+                                    type="range"
+                                    id={"decayRange--"+(lineIndex+1)}
+                                    min="0"
+                                    max="1000"
+                                    step="1"
+                                    value={this.state.sequences[lineIndex].decay}
+                                    onChange={(e) => this.setDecay(lineIndex, parseInt(e.target.value))}
+                                />                              
+                            </div>
                         </div>
+
                     </div>
                 ))}
-                <div className="parameter__tempo">
+                <div className="globalParameter__tempo">
                     <label htmlFor="bpmRange">Tempo (BPM): {this.state.bpm}</label>
                     <input
                         type="range"
@@ -142,21 +168,22 @@ class StepSequencer extends Component {
                         onChange={this.handleBpmChange}
                     />                    
                 </div>
-                <div className="parameter__steps">
+                <div className="globalParameter__steps">
                     <label htmlFor="stepsRange">Nombre de pas: {this.state.numSteps}</label>
                     <input
                         type="range"
+                        id="stepsRange"
                         min="1"
                         max="16"
                         value={this.state.numSteps}
                         onChange={this.handleNumStepsChange}
                     />
                 </div>
-                <div className="parameter__volume">
+                <div className="globalParameter__volume">
                     <label htmlFor="globalVolumeRange">Volume: {this.state.globalVolume}</label>
                     <input
                         type="range"
-                        id="volumeRange"
+                        id="globalVolumeRange"
                         min="0"
                         max="100"
                         step="1"
@@ -164,7 +191,7 @@ class StepSequencer extends Component {
                         onChange={(e) => this.changeGlobalVolume(parseInt(e.target.value))}
                     />                     
                 </div>
-                <div className="parameter__lecture">
+                <div className="globalParameter__lecture">
                     <button className="parameter__lecture--play" onClick={this.state.playing ? this.stopSequencer : this.startSequencer}>
                         {this.state.playing? 'Stop' : 'Play'}
                     </button>
