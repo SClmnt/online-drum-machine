@@ -2,31 +2,47 @@
 
 *{
     font-family: 'Kanit', sans-serif;
+    color: black;
 }
 
 #root{
     width: 100%;
+    height: 100%;
 }
 
 .App{
     display: flex;
     flex-direction: column;
-    width: 100%;
+    max-width: 100%;
+    height: 100%;
     align-items: center;
+    justify-content: space-between;
 }
 
 body{
+    height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;   
     align-items: center;
-    background-color: #f6fff8; 
+    background-color: #f6fff8;
+    margin: 0;
+}
+
+header{
+    margin: 0% 0% 0% 0%;
+    padding-top: 3%;
+}
+
+h1{
+    margin: 0%;
 }
 
 main{
     display: flex;
     flex-direction: column;
-    max-width: 768px;
-    width: 648px;
+    width: 768px;
+    margin: 2% 0%;
 }
 
 .sequence{
@@ -44,10 +60,16 @@ main{
         display:flex;
         flex-direction: row;
         justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
         &--steps{
             display:flex;
             flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 64%;
             &>button{
+                cursor: pointer;
                 aspect-ratio: 1/1;
                 width: 30px;
                 &:hover{
@@ -56,7 +78,13 @@ main{
             }            
         }
         &--name{
-            padding: 0% 3px;
+            cursor: pointer;
+            padding: 0% 10px;
+            background-color: #f0f0f0;
+            &:active{
+                color: #f6fff8;
+                background-color: #6096ba;
+            }
         }
     }
     &__parameter{
@@ -67,15 +95,33 @@ main{
     }
 }
 
-.globalParameter{
+.globalParameters{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &__steps{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        &>label{
+            margin-right: 4%;
+        }
+    }
+    &__buttons{
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
     &__lecture{
-        width: 25%;
+        width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         & >button{
+            cursor: pointer;
             font-size: medium;
-            padding: 5% 10%;
+            padding: 4% 10%;
             &:hover{
                 background-color: #6096ba;
             }
@@ -83,8 +129,9 @@ main{
     }
 }
 
-input[type="range"]{
-    background-color: #6096ba;
+select{
+    border: none;
+    background-color: #f0f0f0;
 }
 
 .playing{
@@ -95,6 +142,20 @@ button{
     border: none;
 }
 
-.active{
+.active,.running{
+    background-color: #6096ba;
+    color: #f6fff8;
+}
+
+h2{
+    margin: 0% 0%;
+}
+
+footer{
+    display: flex;
+    width: 100%;
+    padding: 0% 0%;
+    flex-direction: column;
+    align-items: center;
     background-color: #6096ba;
 }
