@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/online-drum-machine/static/css/main.a72eeb1f.css",
-    "main.js": "/online-drum-machine/static/js/main.8da92580.js",
-    "static/media/kick.wav": "/online-drum-machine/static/media/kick.099ccabad521a17e132b.wav",
-    "static/media/clap.wav": "/online-drum-machine/static/media/clap.a390fb4f5607db9f80f9.wav",
-    "static/media/hihat_open.wav": "/online-drum-machine/static/media/hihat_open.01dcf5b0515308f1e4e0.wav",
-    "static/media/snare.wav": "/online-drum-machine/static/media/snare.3554d4603901ef2de66f.wav",
+    "main.css": "/online-drum-machine/static/css/main.ea7b57c2.css",
+    "main.js": "/online-drum-machine/static/js/main.2f398339.js",
     "static/media/bass.wav": "/online-drum-machine/static/media/bass.8d8e396cfd75c44b1b19.wav",
+    "static/media/hihat_open.wav": "/online-drum-machine/static/media/hihat_open.182a2499ddc6899bd011.wav",
+    "static/media/kick.wav": "/online-drum-machine/static/media/kick.206582b7a807d2e792e6.wav",
+    "static/media/snare.wav": "/online-drum-machine/static/media/snare.60ccfb005b9aa9856868.wav",
+    "static/media/clap.wav": "/online-drum-machine/static/media/clap.15014fd57ea8bf72a8a7.wav",
     "static/media/hihat_closed.wav": "/online-drum-machine/static/media/hihat_closed.09399b68fe1712e8f9a1.wav",
     "index.html": "/online-drum-machine/index.html",
-    "main.a72eeb1f.css.map": "/online-drum-machine/static/css/main.a72eeb1f.css.map",
-    "main.8da92580.js.map": "/online-drum-machine/static/js/main.8da92580.js.map"
+    "main.ea7b57c2.css.map": "/online-drum-machine/static/css/main.ea7b57c2.css.map",
+    "main.2f398339.js.map": "/online-drum-machine/static/js/main.2f398339.js.map"
   },
   "entrypoints": [
-    "static/css/main.a72eeb1f.css",
-    "static/js/main.8da92580.js"
+    "static/css/main.ea7b57c2.css",
+    "static/js/main.2f398339.js"
   ]
 }
