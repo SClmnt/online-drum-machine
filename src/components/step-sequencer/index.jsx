@@ -7,6 +7,7 @@ import closedHat from "../../assets/samples/hihat_closed.wav";
 import bass from "../../assets/samples/bass.wav";
 import { Howler, Howl } from "howler";
 
+
 class StepSequencer extends Component {
     constructor(){
         super()
@@ -64,6 +65,12 @@ class StepSequencer extends Component {
         this.setState({ sequences: updatedSequences });
     }
 
+    clearSteps = (lineIndex) => {
+        const sequences = this.state.sequences;
+
+        this.setState(sequences[lineIndex].steps = new Array(this.state.numSteps).fill(false));
+    }
+
     playStep = () => {
         const {currentStep, sequences, numSteps} = this.state;
         sequences.forEach((sequence) => {
@@ -119,7 +126,9 @@ class StepSequencer extends Component {
 
     handleBpmChange = (event) => {
         const newBpm = parseInt(event.target.value);
+        this.stopSequencer();
         this.setState({ bpm: newBpm});
+        this.startSequencer();
     }
 
 
@@ -129,7 +138,11 @@ class StepSequencer extends Component {
                 {this.state.sequences.map((sequence, lineIndex)=>(
                     <div className="sequence__line" key={lineIndex}>
                         <div className='sequence__grid'>
-                            <span className="sequence__grid--name" onClick={()=> this.trySound(lineIndex)}>{sequence.name}</span>
+                            <div className="sequence__grid--panel">
+                                <span className="sequence__grid--name" onClick={()=> this.trySound(lineIndex)}>{sequence.name}</span>
+                                <span className="sequence__grid--clear" onClick={()=> this.clearSteps(lineIndex)}>Clear</span>
+                            </div>
+                            
                             <div className="sequence__grid--steps">
                                 {sequence.steps.map((step, stepIndex)=>(
                                     <button

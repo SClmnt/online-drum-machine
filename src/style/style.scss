@@ -62,6 +62,12 @@ main{
         justify-content: space-between;
         flex-wrap: wrap;
         align-items: center;
+        &--panel{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 29%;        
+        }
         &--steps{
             display:flex;
             flex-direction: row;
@@ -77,7 +83,7 @@ main{
                 }
             }            
         }
-        &--name{
+        &--name, &--clear{
             cursor: pointer;
             padding: 0% 10px;
             background-color: #f0f0f0;
@@ -90,8 +96,8 @@ main{
     &__parameter{
         display:flex;
         flex-direction: row;
-        justify-content: flex-start;
-        width: 50%;
+        justify-content: space-between;
+        width: 29%;
     }
 }
 
@@ -126,6 +132,17 @@ main{
                 background-color: #6096ba;
             }
         }
+    }
+    &__ranges{
+        width: 40%;
+    }
+    &__tempo,&__volume{
+        display: flex;
+        justify-content: space-between;
+        width: 75%;
+    }
+    &__tempo{
+        width: 89%;
     }
 }
 

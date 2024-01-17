@@ -61,6 +61,12 @@ main {
   flex-wrap: wrap;
   align-items: center;
 }
+.sequence__grid--panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 29%;
+}
 .sequence__grid--steps {
   display: flex;
   flex-direction: row;
@@ -76,20 +82,20 @@ main {
 .sequence__grid--steps > button:hover {
   background-color: #6096ba;
 }
-.sequence__grid--name {
+.sequence__grid--name, .sequence__grid--clear {
   cursor: pointer;
   padding: 0% 10px;
   background-color: #f0f0f0;
 }
-.sequence__grid--name:active {
+.sequence__grid--name:active, .sequence__grid--clear:active {
   color: #f6fff8;
   background-color: #6096ba;
 }
 .sequence__parameter {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  width: 50%;
+  justify-content: space-between;
+  width: 29%;
 }
 
 .globalParameters {
@@ -124,6 +130,17 @@ main {
 }
 .globalParameters__lecture > button:hover {
   background-color: #6096ba;
+}
+.globalParameters__ranges {
+  width: 40%;
+}
+.globalParameters__tempo, .globalParameters__volume {
+  display: flex;
+  justify-content: space-between;
+  width: 75%;
+}
+.globalParameters__tempo {
+  width: 89%;
 }
 
 select {
