@@ -114,7 +114,7 @@ class StepSequencer extends Component {
     }
 
     startSequencer = () => {
-        const stepDuration = 60000 / this.state.bpm;
+        let stepDuration = 60000 / this.state.bpm;
         this.setState({ playing: true});
         this.sequencerInterval = setInterval(this.playStep, stepDuration / 4);
     };
@@ -126,9 +126,11 @@ class StepSequencer extends Component {
 
     handleBpmChange = (event) => {
         const newBpm = parseInt(event.target.value);
-        this.stopSequencer();
+        clearInterval(this.sequencerInterval);
         this.setState({ bpm: newBpm});
-        this.startSequencer();
+        if(this.state.playing){
+            this.startSequencer();
+        }
     }
 
 
